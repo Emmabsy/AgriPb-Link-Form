@@ -1,9 +1,9 @@
 # Login System with User Roles using EJS, Express, and MySQL
 
 <img src="./public/images/Plum1.png" alt="">
-<img src="./public/images/plumb2.png" alt="">
-<img src="./public/images/Plum3.png" alt="">
-<img src="./public/images/Plum4.png" alt="">
+<img src="./public/images/plum2.png" alt="">
+<img src="./public/images/plum3.png" alt="">
+<img src="./public/images/plum4.png" alt="">
 
 A user authentication and authorization system with different user roles (admin and user) built using EJS, Express.js, and MySQL. This project provides a foundation for creating secure web applications with role-based access control.
 
