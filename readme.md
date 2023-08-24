@@ -1,178 +1,67 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const multer = require('multer');
-const moment = require('moment');
+# Login System with User Roles using EJS, Express, and MySQL
 
-require('dotenv').config();
-const pool = require('./config/db');
+<img src="./public/images/Plum1.png" alt="">
+<img src="./public/images/plumb2.png" alt="">
+<img src="./public/images/Plum3.png" alt="">
+<img src="./public/images/Plum4.png" alt="">
 
-//const connection = require('./config/db.js');
+A user authentication and authorization system with different user roles (admin and user) built using EJS, Express.js, and MySQL. This project provides a foundation for creating secure web applications with role-based access control.
 
-const app = express();
-const methodOverride = require('method-override');
+## Table of Contents
 
-app.use(methodOverride('_method'));
+- [Features](#features)
+- [Usage](#usage)
+- [Database Setup](#database-setup)
+- [File Structure](#file-structure)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
+## Features
 
-// Set EJS as the view engine
-app.set('view engine', 'ejs');
+- User authentication with role-based access control.
+- Admin users can access index, edit, and user management pages.
+- Regular users can access only the new page.
+- Basic user session management.
+- Responsive design for various screen sizes.
 
-// Serve static files from the public directory
-app.use(express.static('public'));
-//Alternative
-app.use(express.static(path.join(__dirname, 'public')));
+cd your-project
+npm install
+## Usage
+!Important
+Before using this project, please contact me for access and further instructions.
 
-// Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+Configure your MySQL database connection in app.js:
 
+ ## Database Setup
+Create a MySQL database.
 
+Import the database.sql file in the project directory into your MySQL database to create the necessary tables.
 
-//File uploads
+## File Structure
+Explain the structure of your project's files and directories. For example:
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
+public/: Contains static assets (CSS, images, etc.).
+views/: EJS templates for rendering pages.
+routes/: Express routes for different pages and actions.
+app.js: Main application file.
+Technologies Used
+Node.js
+Express.js
+EJS (Embedded JavaScript templates)
+MySQL
+Bootstrap (for styling)
+Contributing
+Contributions are welcome! Feel free to open issues and pull requests.
 
-const fileFilter = function (req, file, cb) {
-  // Allowed file types
-  const allowedFileTypes = ['.jpg', '.jpeg', '.png', '.gif'];
-  const ext = path.extname(file.originalname);
-  if (!allowedFileTypes.includes(ext)) {
-    return cb(new Error('Only image files (jpg, jpeg, png, gif) are allowed'), false);
-  }
-  cb(null, true);
-}
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-const upload = multer({ storage: storage, fileFilter: fileFilter });
-
-
-
-
-// Define routes
-
-// GET /
-// Index route - display all farmers
-app.get('/', (req, res) => {
-  pool.query('SELECT * FROM res ORDER BY groupname', [], (err, results) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).send('Internal server error');
-    } else {
-      res.render('index', { res: results });
-    }
-  });
-});
-
-//New
-app.get('/', (req, res) => {
-  const minDate = new Date();
-  minDate.setFullYear(minDate.getFullYear() - 20); // Set minimum date to 20 years ago
-  res.render('new', { minDate: minDate.toISOString().slice(0, 10) });
-});
+## Contact
+Author: Emma
+GitHub: Emmabsy
+Email: emaikuri@gmail.com
 
 
 
-//New
-
-// New route - display a form to add a new farmer
-app.get('/res/new', (req, res) => {
-  res.render('new');
-});
-
-// POST /
-
-app.post('/submit', upload.single('photo'), (req, res) => {
-  console.log(req.body); // log the entire request body
-  const { groupname, firstname, middlename, lastname, dob, location, phone, age, maritalstatus, idnumber, occupation, incomesource, monthlyincome, children, under5, children6to11, children12to18, landstatus, landsize, cropgrown, marketaccess, wateraccess, lastcrop,animals, cropearnings, geoloc} = req.body;
-
-  // Server-side validation for file type
-  const allowedFileTypes = ['.jpg', '.jpeg', '.png', '.gif'];
-  const ext = path.extname(req.file.originalname);
-  if (!allowedFileTypes.includes(ext)) {
-    return res.status(400).send('Only image files (jpg, jpeg, png, gif) are allowed');
-  }
-
-  // Create a comma-separated string of the selected farm animals
-  console.log(animals); // check if animals is defined in the request body
-  let farmanimals = ''; 
-  if (animals && Array.isArray(animals)) {
-    farmanimals = animals.join(',');
-  }
-
-  // Insert the survey data into the database
-  pool.query('INSERT INTO res (groupname, firstname, middlename, lastname, dob, location, phone, age, maritalstatus, idnumber, occupation, incomesource, monthlyincome, children, under5, children6to11, children12to18, landstatus, landsize, cropgrown, marketaccess, wateraccess, lastcrop, animals,cropearnings, geoloc, photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [groupname, firstname, middlename, lastname, dob, location, phone, age, maritalstatus, idnumber, occupation, incomesource, monthlyincome, children, under5, children6to11, children12to18, landstatus, landsize, cropgrown, marketaccess, wateraccess, lastcrop, farmanimals, cropearnings, geoloc, req.file.filename], (error, results, fields) => {
-    if (error) {
-      if (error.code === 'ER_DUP_ENTRY') {
-        // Handle MySQL error for duplicate entry
-        return res.status(400).send('Phone or ID number already exists');
-      }
-      console.error(error.message);
-      return res.status(500).send('Internal server error');
-    }
-    res.redirect('/success');
-  });
-});
-
-
-
-
-// GET /edit/:id
-app.get('/res/:id/edit', (req, res) => {
-  const id = req.params.id;
-  pool.query('SELECT * FROM res WHERE id = ?', [id], (error, results) => {
-    if (error) throw error;
-    res.render('edit', { survey: 'Edit Record', record: results[0] });
-    //res.render('edit', { survey: results});
-  });
-});
-
-// POST /update/:id
-app.put('/res/:id', (req, res) => {
-  const id = req.params.id;
-  const { groupname, firstname, middlename, lastname, dob, location, phone, age, maritalstatus, idnumber, occupation, incomesource, monthlyincome, children, under5, children6to11, children12to18, landstatus, landsize, cropgrown, marketaccess, wateraccess, lastcrop, animals,cropearnings,geoloc } = req.body;
-
-  // Create a comma-separated string of the selected farm animals
-  console.log(animals); // check if animals is defined in the request body
-  let farmanimals = ''; 
-  if (animals && Array.isArray(animals)) {
-    farmanimals = animals.join(',');
-  }
-
-  pool.query('UPDATE res SET groupname = ?, firstname = ?, middlename = ?, lastname = ?, dob = ?, location = ?, phone = ?, age = ?, maritalstatus = ?, idnumber = ?, occupation = ?, incomesource = ?, monthlyincome = ?, children = ?, under5 = ?, children6to11 = ?, children12to18 = ?, landstatus = ?, landsize = ?, cropgrown = ?, marketaccess = ?, wateraccess = ?, lastcrop = ?, animals=?, cropearnings = ? ,geoloc=? WHERE id = ?', [groupname, firstname, middlename, lastname, dob, location, phone, age, maritalstatus, idnumber, occupation, incomesource, monthlyincome, children, under5, children6to11, children12to18, landstatus, landsize, cropgrown, marketaccess, wateraccess, lastcrop,farmanimals, cropearnings, geoloc, id], (error, results) => {
-    if (error) throw error;
-    res.redirect('/success');
-     console.log(results);
-
-  });
-});
-
-
-
-
-// DELETE /delete/:id
-app.delete('/res/:id', (req, res) => {
-  const id = req.params.id;
-
-  // Delete the survey data from the database
-  pool.query('DELETE FROM res WHERE id=?', [id], (error, results) => {
-    if (error) throw error;
-    res.redirect('/');
-  });
-});
-
-
-// GET /thank-you
-app.get('/success', (req, res) => {
-  res.render('success', { title: 'Thank You' });
-});
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Server started on http://localhost:3000');
-});
