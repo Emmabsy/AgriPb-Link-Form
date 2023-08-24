@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+        <div class="container table-responsive">
+            <%- include('partials/title') %>
+
+            <table class="table table-bordered" >
+                <tr>
+                    <th>Group Name:</th>
+                    <td>
+                        <%= res.groupname %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>County:</th>
+                    <td>
+                        <%= res.county %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sub-County:</th>
+                    <td>
+                        <%= res.subcounty %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Location:</th>
+                    <td>
+                        <%= res.location %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>First Name:</th>
+                    <td>
+                        <%= res.firstname %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Middle Name:</th>
+                    <td>
+                        <%= res.middlename %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Last Name:</th>
+                    <td>
+                        <%= res.lastname %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date of Birth:</th>
+                    <td>
+                        <%= new Date(res.dob).toDateString() %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Village:</th>
+                    <td>
+                        <%= res.village %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Phone:</th>
+                    <td>
+                        <%= res.phone %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>
+                        <%= res.age %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Marital Status:</th>
+                    <td>
+                        <%= res.maritalstatus %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID Number:</th>
+                    <td>
+                        <%= res.idnumber %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Occupation:</th>
+                    <td>
+                        <%= res.occupation %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Income Source:</th>
+                    <td>
+                        <%= res.incomesource %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Monthly Income:</th>
+                    <td>
+                        <%= res.monthlyincome %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Children:</th>
+                    <td>
+                        <%= res.children %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Under 5:</th>
+                    <td>
+                        <%= res.under5 %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>children6to11:</th>
+                    <td>
+                        <%= res.children6to11%>
+                    </td>
+                </tr>
+                <tr>
+                    <th>children12to18:</th>
+                    <td>
+                        <%= res.children12to18 %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Land Status:</th>
+                    <td>
+                        <%= res.landstatus %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Land Size:</th>
+                    <td>
+                        <%= res.landsize %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Crop Grown:</th>
+                    <td>
+                        <%= res.cropgrown %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Market Access:</th>
+                    <td>
+                        <%= res.marketaccess %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Water Access:</th>
+                    <td>
+                        <%= res.wateraccess %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Last Crop:</th>
+                    <td>
+                        <%= res.lastcrop %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Animals :</th>
+                    <td>
+                        <%= res.animals %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Crop Earnings:</th>
+                    <td>
+                        <%= res.cropearnings %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Project Land:</th>
+                    <td>
+                        <%= res.projectland %>
+                    </td>
+                </tr>
+                <tr>
+                    <th> Pumpkin</th>:</th>
+                    <td>
+                        <%= res.pumpkin %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Project Time:</th>
+                    <td>
+                        <%= res.projecttime %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Geolocation:</th>
+                    <td>
+                        <%= res.geoloc %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Photo:</th>
+                    <td>
+                        <%= res.photo %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Terms:</th>
+                    <td>
+                        <%= res.terms %>
+                    </td>
+                </tr>
+                <!-- Add more fields here -->
+            </table>
+        </div>
+</body>
+
+</html>

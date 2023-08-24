@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/nav') %>
+        <div class="container table-responsive">
+            <%- include('partials/title') %>
+
+
+            <table class="table" style="background-color: #ffffff;">
+                <thead>
+                    <tr>
+                        <th>Group Name</th>
+                        <th>County</th>
+                        <th>SubCounty</th>
+                        <th>Location</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Date of Birth</th>
+                        <th>Village</th>
+                        <th>Phone Number</th>
+                        <th>Age</th>
+                        <th>Marital Status</th>
+                        <th>ID Number</th>
+                        <th>Main Occupation</th>
+                        <th>Income Source</th>
+                        <th>Monthly Income</th>
+                        <th>Have children</th>
+                        <th>Children Under 5</th>
+                        <th>Children 6-11</th>
+                        <th>Children 12-18</th>
+                        <th>Land Status</th>
+                        <th>Land Size</th>
+                        <th>Crop Grown</th>
+                        <th>Market Acces</th>
+                        <th>Water Access</th>
+                        <th>Last Crop</th>
+                        <th>Farm Animals</th>
+                        <th>Crop Earnings</th>
+                        <th>Project Land</th>
+                        <th>Pumpkin History</th>
+                        <th>Project Time</th>
+                        <th>Geo Location</th>
+                        <th>Farmer Photo</th>
+                        <th>Agree Terms</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var i=0; i < res.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= res[i].groupname %>
+                            </td>
+                            <td>
+                                <%= res[i].county %>
+                            </td>
+                            <td>
+                                <%= res[i].subcounty %>
+                            </td>
+                            <td>
+                                <%= res[i].location %>
+                            </td>
+                            <td>
+                                <%= res[i].firstname %>
+                            </td>
+                            <td>
+                                <%= res[i].middlename %>
+                            </td>
+                            <td>
+                                <%= res[i].lastname %>
+                            </td>
+
+                            <td>
+                                <%= new Date(res[i].dob).toLocaleDateString() %>
+                            </td>
+                            <td>
+                                <%= res[i].village %>
+                            </td>
+                            <td>
+                                <%= res[i].phone %>
+                            </td>
+                            <td>
+                                <%= res[i].age %>
+                            </td>
+                            <td>
+                                <%= res[i].maritalstatus %>
+                            </td>
+                            <td>
+                                <%= res[i].idnumber %>
+                            </td>
+                            <td>
+                                <%= res[i].occupation %>
+                            </td>
+                            <td>
+                                <%= res[i].incomesource %>
+                            </td>
+                            <td>
+                                <%= res[i].monthlyincome %>
+                            </td>
+                            <td>
+                                <%= res[i].children %>
+                            </td>
+                            <td>
+                                <%= res[i].under5 %>
+                            </td>
+                            <td>
+                                <%= res[i].children6to11%>
+                            </td>
+                            <td>
+                                <%= res[i].children12to18 %>
+                            </td>
+                            <td>
+                                <%= res[i].landstatus %>
+                            </td>
+                            <td>
+                                <%= res[i].landsize %>
+                            </td>
+                            <td>
+                                <%= res[i].cropgrown %>
+                            </td>
+                            <td>
+                                <%= res[i].marketaccess %>
+                            </td>
+                            <td>
+                                <%= res[i].wateraccess %>
+                            </td>
+                            <td>
+                                <%= res[i].lastcrop %>
+                            </td>
+                            <td>
+                                <%= res[i].animals %>
+                            </td>
+                            <td>
+                                <%= res[i].cropearnings %>
+                            </td>
+                            <td>
+                                <%= res[i].projectland %>
+                            </td>
+                            <td>
+                                <%= res[i].pumpkin %>
+                            </td>
+                            <td>
+                                <%= res[i].projecttime %>
+                            </td>
+                            <td>
+                                <%= res[i].geoloc %>
+                            </td>
+                            <td>
+                                <%= res[i].photo %>
+                            </td>
+                            <td>
+                                <%= res[i].terms %>
+                            </td>
+
+
+                            <td>
+                                <div class="d-flex">
+                                    <div class="col-6">
+                                        <a href="/res/<%= res[i].id %>/edit" class="btn btn-success"
+                                            style="width: 60px;">Edit</a>
+                                            <form action="/res/<%= res[i].id %>?_method=DELETE" method="POST">
+                                                <button class="btn-sm btn-danger">Delete</button>
+                                            </form>
+                                            
+                                            
+                                        
+                                    </div>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+        </br> </br>
+        <div class="text-center" style="text-align:center;">
+            <a href="/res/new" class="btn btn-info mb-2 mt-0" style="width: 250px;"> Add a New Farmer</a>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

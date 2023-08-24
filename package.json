@@ -1,0 +1,45 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "bootstrap": "^5.2.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-mysql-session": "^3.0.0",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.15.0",
+    "geolocation": "^0.2.0",
+    "jquery": "^3.6.4",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.0",
+    "nodemon": "^2.0.21",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "popper.js": "^1.16.1"
+  },
+  "name": "plumbee3",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "build": "npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "const express = require('express'); const bodyParser = require('body-parser'); const path = require('path'); const multer = require('multer'); const moment = require('moment');",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emmabsy/FarmerSurveyForm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Emmabsy/FarmerSurveyForm/issues"
+  },
+  "homepage": "https://github.com/Emmabsy/FarmerSurveyForm#readme"
+}

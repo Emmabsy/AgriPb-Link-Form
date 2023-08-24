@@ -1,0 +1,250 @@
+:root {
+    --main-color: #22223B;
+    --secondary-color: #4A4E69;
+    --light-text: #FFFFFF;
+    --dark-text: #9A9BB2;
+    --card-bg: #FFFFFF;
+    --card-header-bg: #F0F3BD;
+    --input-bg: #F0F3BD;
+    --input-border: #E7ECEF;
+    --btn-bg: #FFD166;
+    --btn-hover-bg: #F4A261;
+    --btn-border: #FFD166;
+    --btn-hover-border: #F4A261;
+    --bc: #F9F7F7;
+}
+
+body {
+    padding-top: 0px;
+    color: var(--main-color);
+    margin: 0;
+    background-color: var(--bc);
+}
+
+/* Navigation /
+/ Light mode styles */
+
+.dark-mode {
+    filter: invert(1);
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+}
+
+.form-control,
+label,
+h3 {
+    color: var(--main-color);
+}
+
+#dark-mode-switch:checked+label+#dark-mode-icon {
+    transform: translateY(0);
+}
+
+#dark-mode-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--light-text);
+    border-radius: 50%;
+    position: absolute;
+    top: 8px;
+    right: 40px;
+    transition: transform 0.2s ease-in-out;
+}
+
+#dark-mode-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Navigation /
+/ Dark mode */
+
+body.dark-mode .navbar {
+    background-color: var(--secondary-color);
+    color: var(--dark-text);
+}
+
+body.dark-mode .navbar-brand {
+    color: var(--dark-text);
+}
+
+body.dark-mode .navbar-nav .nav-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .card {
+    background-color: var(--card-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode .card-header {
+    background-color: var(--card-header-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode .card-header h3 {
+    background-color: var(--card-header-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode .form-group label {
+    color: var(--main-color);
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="password"] {
+    background-color: var(--input-bg);
+    color: var(--dark-text);
+    border: 1px solid var(--input-border);
+}
+
+body.dark-mode .btn-info {
+    background-color: var(--btn-bg);
+    border-color: var(--btn-border);
+}
+
+body.dark-mode .btn-info:hover {
+    background-color: var(--btn-hover-bg);
+    border-color: var(--btn-hover-border);
+}
+/* Dark mode styles */
+
+body.dark-mode thead {
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+}
+
+body.dark-mode tbody {
+    background-color: var(--card-bg);
+    color: var(--dark-text);
+}
+
+
+
+.logo-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-header img {
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.header-text {
+    margin-left: 10px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-control.error {
+    border-color: #FF4136;
+}
+
+.error-message {
+    color: #FF4136;
+}
+
+#map {
+    height: 200px;
+    margin-bottom: 15px;
+}
+.btn.btn-info {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+
+}
+
+.btn.btn-danger {
+    height: 30px;
+    width: 60px;
+}
+
+.btn.btn-success {
+    margin-bottom: 5px;
+    height: 30px;
+    width: 60px;
+}
+
+hr.line {
+    background-color: rgb(46, 46, 53);
+}
+
+td {
+    font-size: 14px;
+    /* adjust the size as needed */
+}
+
+form-check {
+    font-size: 10px;
+    /* adjust the font size as desired */
+}
+
+
+
+/* Form container */
+.form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Form buttons */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-buttons button[type="submit"] {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.form-buttons button[type="reset"] {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Error messages */
+.error-messages {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+.error-messages ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.error-messages li {
+    margin-bottom: 5px;
+}
+
+
+/*Start here */
+/* Media queries for smaller screens */

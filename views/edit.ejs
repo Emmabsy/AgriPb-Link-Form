@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('partials/head') %> 
+    </head>
+<body>
+    <%- include('partials/nav') %>
+    <!--<hr class="border-bottom line"> -->
+    <div class="container" style="background-color: #ffffff;">
+        <%- include('partials/title') %>
+        <form method="POST" action="/res/<%= record.id %>?_method=PUT">
+            <div class="form-group row">
+                <label for="group" class="col-sm-3 col-form-label">Select Group:</label>
+                <div class="col-sm-9">
+                    <select id="group" name="groupname" class="form-control">
+                        <option value="">--Select--</option>
+
+                        <option value="Baari" <%=record.groupname==="Baari" ? "selected" : "" %>>Baari Farmer supply
+                            group</option>
+                        <option value="Mairo-inya" <%=record.groupname==="Mairo-inya" ? "selected" : "" %>>Mairo-inya
+                            Farmer supply group</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="county" class="col-sm-3 col-form-label">County:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="county" name="county" value="<%= record.county %>" readonly
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="sub-county" class="col-sm-3 col-form-label">Sub-county:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="sub-county" name="subcounty" value="<%= record.subcounty %>" readonly
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="location" class="col-sm-3 col-form-label">Location:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="location" name="location" value="<%= record.location %>" readonly
+                        class="form-control">
+                </div>
+            </div>
+
+
+
+            <!---->
+
+            <h5 class="text-center mb-3" style="text-decoration: underline;"> Personal Information</h5>
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-3 ">
+                    <label for="first-name">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname"
+                        value="<%= record.firstname %>" required>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="first-name">Middle Name</label>
+                    <input type="text" class="form-control" id="middlename" name="middlename"
+                        value="<%= record.middlename %>" required>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="<%= record.lastname %>"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" class="form-control" id="dob" name="dob" min="1940-01-01" max="2000-01-01"
+                        value="<%= record.dob.toISOString().substring(0, 10) %>" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="village">Village(where you live)</label>
+                    <input type="text" class="form-control" id="village" name="village" value="<%= record.village %>"
+                        required>
+
+
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="<%= record.phone %>">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-3">
+                    <label for="age">Age </label>
+                    <input type="number" class="form-control" id="age" name="age" min="21" value="<%= record.age %>"
+                        readonly>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="marital-status">Marital Status</label>
+                    <select class="form-control" id="marital-status" name="maritalstatus" required>
+                        <option <%=(record.maritalstatus==='Single' ) ? 'selected' : '' %>>Single</option>
+                        <option <%=(record.maritalstatus==='Married' ) ? 'selected' : '' %>>Married</option>
+                        <option <%=(record.maritalstatus==='Divorced' ) ? 'selected' : '' %>>Divorced</option>
+                        <option <%=(record.maritalstatus==='Seperated' ) ? 'selected' : '' %>>Seperated</option>
+                        <option <%=(record.maritalstatus==='Never Married' ) ? 'selected' : '' %>>Never Married</option>
+                        <option <%=(record.maritalstatus==='Widowed' ) ? 'selected' : '' %>>Widowed</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="id-number">ID Number</label>
+                    <input type="text" class="form-control" id="id-number" name="idnumber" required
+                        value="<%= record.idnumber %>">
+                </div>
+            </div>
+            <h5 class="text-center mb-3 " style="text-decoration: underline;">Household Size and Income Details</h5>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="main-occupation">Main Occupation of record</label>
+                    <select class="form-control" id="main-occupation" name="occupation" required>
+                        <option <%=(record.occupation==='Livestock' ) ? 'selected' : '' %>>Livestock</option>
+                        <option <%=(record.occupation==='Own record Labor' ) ? 'selected' : '' %>>Own record Labor
+                        </option>
+                        <option <%=(record.occupation==='Employed (Salaried)' ) ? 'selected' : '' %>>Employed (Salaried)
+                        </option>
+                        <option <%=(record.occupation==='Casual Labor' ) ? 'selected' : '' %>>Casual Labor</option>
+                        <option <%=(record.occupation==='Petty Trade' ) ? 'selected' : '' %>>Petty Trade</option>
+                        <option <%=(record.occupation==='Merchant/Trader' ) ? 'selected' : '' %>>Merchant/Trader
+                        </option>
+                        <option <%=(record.occupation==='Firewood/Charcoal' ) ? 'selected' : '' %>>Firewood/Charcoal
+                        </option>
+                        <option <%=(record.occupation==='Fishing' ) ? 'selected' : '' %>>Fishing </option>
+                        <option <%=(record.occupation==='Others' ) ? 'selected' : '' %>>Others </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="source-income">Main Current Source of Income</label>
+                    <select class="form-control" id="source-income" name="incomesource" required>
+                        <option <%=(record.incomesource==="No income" ) ? "selected" : "" %>>No income</option>
+                        <option <%=(record.incomesource==="Sale of livestock" ) ? "selected" : "" %>>Sale of livestock
+                        </option>
+                        <option <%=(record.incomesource==="Sale of livestock products" ) ? "selected" : "" %>>Sale of
+                            livestock
+                            products</option>
+                        <option <%=(record.incomesource==="Sale of crops" ) ? "selected" : "" %>>Sale of Crops </option>
+                        <option <%=(record.incomesource==="Petty Trading" ) ? "selected" : "" %>>Petty Trading</option>
+                        <option <%=(record.incomesource==="Casual Labor" ) ? "selected" : "" %>>Casual Labor</option>
+                        <option <%=(record.incomesource==="Permanent Job" ) ? "selected" : "" %>>Permanent Job</option>
+                        <option <%=(record.incomesource==="Sale of personal assets" ) ? "selected" : "" %>>Sale of
+                            personal assets</option>
+                        <option <%=(record.incomesource==="Remittance" ) ? "selected" : "" %>>Remittance</option>
+                        <option <%=(record.incomesource==="Fishing" ) ? "selected" : "" %>>Fishing</option>
+                        <option <%=(record.incomesource==="Others" ) ? "selected" : "" %>>Others</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="monthly-income">Monthly Income of the record</label>
+                    <select class="form-control" id="monthly-income" name="monthlyincome" required>
+                        <option <%=(record.monthlyincome==="Less than KES 1,000" ) ? "selected" : "" %>>Less than 1,000
+                        </option>
+                        <option <%=(record.monthlyincome==="KES 1,000-KES 2,000" ) ? "selected" : "" %>>1,000-2,000
+                        </option>
+                        <option <%=(record.monthlyincome==="KES 2,000-KES 5,000" ) ? "selected" : "" %>>2,000-5,000
+                        </option>
+                        <option <%=(record.monthlyincome==="KES 5,000-KES 7,000" ) ? "selected" : "" %>>5,000-7,000
+                        </option>
+                        <option <%=(record.monthlyincome==="More than KES 7,000" ) ? "selected" : "" %>>More than 7,000
+                        </option>
+                    </select>
+                </div>
+
+                <!---->
+                <div class="form-group col-md-6 mb-3">
+                    <label for="children">Do you have children?</label>
+                    <select class="form-control" id="children" name="children" required>
+
+                        <option <%=(record.children==="No" ) ? "selected" : "" %>>No</option>
+                        <option <%=(record.children==="Yes" ) ? "selected" : "" %>>Yes</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4 mb-3">
+                    <label for="under-5">How many children under 5 years?</label>
+                    <input type="number" class="form-control" id="under-5" name="under5" min="0"
+                        value="<%= record.under5 %>">
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="children-6-to-11">How many children between 6 to 11 years?</label>
+                    <input type="number" class="form-control" id="children-6-to-11" name="children6to11" min="0"
+                        value="<%= record.children6to11 %>">
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                    <label for="children-12-to-18">How many children between 12 to 18 years?</label>
+                    <input type="number" class="form-control" id="children-12-to-18" name="children12to18" min="0"
+                        value="<%= record.children12to18 %>">
+                </div>
+            </div>
+            <h5 class="text-center mb-3" style="text-decoration: underline;">Farm Details for Household</h5>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="land-status">Do you own or lease the land that you record?</label>
+                    <select class="form-control" id="land-status" name="landstatus" value="<%= record.landstatus %>">
+                        <option <%=record.landstatus==="Own" ? "selected" : "" %>>Own</option>
+                        <option <%=record.landstatus==="Lease" ? "selected" : "" %>>Lease</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="land-size">How big is your land (in acres)?</label>
+                    <input type="number" class="form-control" id="land-size" name="landsize" min="0.01" step="0.01"
+                        value="<%= record.landsize %>" required>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6 mb-3">
+                    <label for="crop-grown">What do you grow in your plot?</label>
+                    <input type="text" class="form-control" id="crop-grown" name="cropgrown"
+                        value="<%= record.cropgrown %>" required>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label for="market-access">How's access to the market?</label>
+                    <select class="form-control" id="market-access" name="marketaccess" required>
+                        <option <%=record.marketaccess==='Local market' ? 'selected' : '' %>>Local market</option>
+                        <option <%=record.marketaccess==='Urban market' ? 'selected' : '' %>>Urban market</option>
+                        <option <%=record.marketaccess==='Middlemen' ? 'selected' : '' %>>Middlemen</option>
+                        <option <%=record.marketaccess==='Supermarkets' ? 'selected' : '' %>>Supermarkets</option>
+                        <option <%=record.marketaccess==='Exports' ? 'selected' : '' %>>Exports</option>
+                        <option <%=record.marketaccess==='The internet' ? 'selected' : '' %>>The internet</option>
+                        <option <%=record.marketaccess==='Others' ? 'selected' : '' %>>Others</option>
+                    </select>
+                    <div id="other-market-access" style="display:none;">
+                        <input type="text" class="form-control" name="othermarketaccess"
+                            value="<%= record.othermarketaccess %>" placeholder="Enter other market access...">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="water-access">What is your main access to water?</label>
+                    <select class="form-control" id="water-access" name="wateraccess" required>
+                        <option <%=record.wateraccess==='Own a well' ? 'selected' : '' %>>Own a well</option>
+                        <option <%=record.wateraccess==='Neighbors well' ? 'selected' : '' %>>Neighbors well</option>
+                        <option <%=record.wateraccess==='Tap water' ? 'selected' : '' %>>Tap water</option>
+                        <option <%=record.wateraccess==='Storage tank from rain harvest' ? 'selected' : '' %>>Storage
+                            Tank from rain
+                            harvest</option>
+                        <option <%=record.wateraccess==='River' ? 'selected' : '' %>>River</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="crop">Which main crop did you harvest last season?</label>
+                    <input type="text" class="form-control" name="lastcrop" id="crop" value="<%= record.lastcrop %>"
+                        required>
+                </div>
+            </div>
+            <!--Trial-->
+            <div class="form-row d-flex flex-wrap">
+                <!-- ... other form fields ... -->
+                <div class="form-group col-md-6 mb-3">
+                    <label for="farm-animals">Do you own any farm animals? (List of options/multiple selection)</label>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Poultry" name="animals"
+                                    id="farm-animals-poultry" <% if (record.animals.includes('Poultry')) { %> checked <%
+                                    } %>>
+                                    <label class="form-check-label" for="farm-animals-poultry">
+                                        Poultry (chickens, ducks, geese, etc.)
+                                    </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Cows" name="animals"
+                                    id="farm-animals-cows" <% if (record.animals.includes('Cows')) { %> checked <% } %>>
+                                    <label class="form-check-label" for="farm-animals-cows">
+                                        Cows
+                                    </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Goats" name="animals"
+                                    id="farm-animals-goats" <% if (record.animals.includes('Goats')) { %> checked <% }
+                                    %>>
+                                    <label class="form-check-label" for="farm-animals-goats">
+                                        Goats
+                                    </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Sheep" name="animals"
+                                    id="farm-animals-sheep" <% if (record.animals.includes('Sheep')) { %> checked <% }
+                                    %>>
+                                    <label class="form-check-label" for="farm-animals-sheep">
+                                        Sheep
+                                    </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="donkey" name="animals"
+                                    id="farm-animals-donkey" <% if (record.animals.includes('Donkey')) { %> checked <% }
+                                    %>>
+                                    <label class="form-check-label" for="farm-animals-donkey">
+                                        Donkey
+                                    </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Fish" name="animals"
+                                    id="farm-animals-fish" <% if (record.animals.includes('Fish')) { %> checked <% } %>>
+                                    <label class="form-check-label" for="farm-animals-fish">
+                                        Fish
+                                    </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Bees" name="animals"
+                                    id="farm-animals-bees" <% if (record.animals.includes('Bees')) { %> checked <% } %>>
+                                    <label class="form-check-label" for="farm-animals-bees">
+                                        Bees
+                                    </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Trial-->
+                <div class="form-group col-md-6 mb-3">
+                    <label for="earnings">How much did you earn from this crop last season?</label>
+                    <input type="text" class="form-control" name="cropearnings" id="cropearnings"
+                        value="<%= record.cropearnings %>" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-3">
+                    <label for="land-size"> What land size are you committing to the project (in acres)?</label>
+                    <input type="number" class="form-control" id="project" name="projectland" min="0.01" step="0.01"
+                        value="<%= record.projectland %>" required>
+
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="pumpkin">Have you ever planted pumpkins before?</label>
+                    <select class="form-control" id="pumpkin" name="pumpkin" required>
+                        <option value="Yes" <%=(record.pumpkin==="Yes" ) ? "selected" : "" %>>Yes</option>
+                        <option value="No" <%=(record.pumpkin==="No" ) ? "selected" : "" %>>No</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12 mb-3">
+
+                    <label for="land-size">How much free time can you commit to the project weekly (in hours)?</label>
+                    <input type="number" class="form-control" id="project-time" name="projecttime" min="6" step="1"
+                        value="<%= record.projecttime%>" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-3" id="location-container">
+                    <label for="gps">GPS household location</label>
+                    <button type="button" onclick="getLocation()">Get Location</button>
+                    <input type="hidden" name="geoloc" id="geolocation" value="<%= record.geoloc %>" required>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <label for="file">Upload photo of ID:</label>
+                    <!-- Add a hidden input field to hold the current photo filename -->
+
+                    <input type="hidden" name="currentPhoto" value="<%= record.photo %>">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="terms" required>
+                        By clicking here you agree to the terms and conditions of joining this group.
+                    </label>
+                </div>
+                <div style="text-align:center;">
+                    <button type="submit" class="btn btn-info " style="width: 300px;">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+        <script>
+            // Add an event listener to the select element
+            const groupToLocationMap = {
+                "baari": {
+                    "county": "Nyandarua",
+                    "subcounty": "Ndaragwa",
+                    "location": "Baari"
+                },
+                "Mairo-inya": {
+                    "county": "Nyeri",
+                    "subcounty": "Mathira",
+                    "location": "Mairo-inya"
+                }
+            };
+
+            const groupSelect = document.getElementById("group");
+            const countyInput = document.getElementById("county");
+            const subcountyInput = document.getElementById("sub-county");
+            const locationInput = document.getElementById("location");
+
+            groupSelect.addEventListener("change", () => {
+                const selectedGroup = groupSelect.value;
+                if (groupToLocationMap.hasOwnProperty(selectedGroup)) {
+                    countyInput.value = groupToLocationMap[selectedGroup].county;
+                    subcountyInput.value = groupToLocationMap[selectedGroup].subcounty;
+                    locationInput.value = groupToLocationMap[selectedGroup].location;
+                } else {
+                    countyInput.value = "";
+                    subcountyInput.value = "";
+                    locationInput.value = "";
+                }
+            });
+
+
+
+
+        </script>
+        <script>
+            function getLocation() {
+                // Check if geolocation is supported by the browser
+                if (navigator.geolocation) {
+                    // Use getCurrentPosition() to retrieve the user's current location
+                    navigator.geolocation.getCurrentPosition(
+                        // Success callback
+                        function (position) {
+                            console.log("Button clicked successfully");
+                            // Get latitude and longitude coordinates from the position object
+                            var latitude = position.coords.latitude;
+                            var longitude = position.coords.longitude;
+                            // Construct a string with the latitude and longitude separated by a comma
+                            var geoloc = latitude + "," + longitude;
+                            console.log("Location coordinates retrieved successfully:", geoloc);
+                            // Set the value of the hidden location input field to the location string
+                            document.getElementById("geolocation").value = geoloc;
+                        },
+                        // Error callback
+                        function (error) {
+                            console.log(
+                                "An error occurred while trying to retrieve location:",
+                                error
+                            );
+                        }
+                    );
+                } else {
+                    // Geolocation is not supported by the browser
+                    console.log("Geolocation is not supported by this browser.");
+                }
+            }
+
+            // Event listener for button to get user's location
+            document
+                .getElementById("location-button")
+                .addEventListener("click", getLocation);
+
+            // Validation function
+            function validateForm(event) {
+                var geolocationField = document.getElementById("geolocation");
+                if (geolocationField.value === "") {
+                    // Show an error message and prevent form submission
+                    alert("Please make you click on Capture Geolocation of the farmer before submitting the form.");
+                    event.preventDefault();
+                }
+            }
+            // Event listener for form submission
+            document.getElementById("survey").addEventListener("submit", validateForm);</script>
+
+        </script>
+        <script>
+            const childrenSelect = document.getElementById("children");
+            const childrenQuestions = document.getElementById("children-questions");
+            childrenSelect.addEventListener("change", function () {
+                if (childrenSelect.value === "No") {
+                    document.getElementById("under-5").value = 0;
+                    document.getElementById("children-6-to-11").value = 0;
+                    document.getElementById("children-12-to-18").value = 0;
+                    document.getElementById("under-5").disabled = true;
+                    document.getElementById("children-6-to-11").disabled = true;
+                    document.getElementById("children-12-to-18").disabled = true;
+                } else {
+                    document.getElementById("under-5").disabled = false;
+                    document.getElementById("children-6-to-11").disabled = false;
+                    document.getElementById("children-12-to-18").disabled = false;
+                }
+            });
+            // Enable under5Field, children6to11Field, and children12to18Field when page loads if childrenField is already set to "yes"
+            if (childrenField.value === "Yes") {
+                under5Field.disabled = false;
+                children6to11Field.disabled = false;
+                children12to18Field.disabled = false;
+            }
+            form.addEventListener("submit", function (event) {
+            });
+        </script>
+        <script>
+            //Market Access
+            const marketAccessSelect = document.getElementById('market-access');
+            const otherMarketAccessDiv = document.getElementById('other-market-access');
+            marketAccessSelect.addEventListener('change', () => {
+                if (marketAccessSelect.value === 'Others') {
+                    otherMarketAccessDiv.style.display = 'block';
+                } else {
+                    otherMarketAccessDiv.style.display = 'none';
+                }
+            });
+        </script>
+        
+</body>
+<%- include('partials/footer') %>
+
+
+</html>

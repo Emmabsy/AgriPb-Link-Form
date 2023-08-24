@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/nav') %>
+        <div class="container" style="background-color: #ffffff;">
+            <%- include('partials/title') %>
+            <form id="survey" method="POST" action="/submit" enctype="multipart/form-data"
+                onsubmit="return validateForm();">
+                <div class="form-group row">
+                    <label for="group" class="col-sm-3 col-form-label">Select Group:</label>
+                    <div class="col-sm-9">
+                        <select id="group" name="groupname" class="form-control">
+                            <option value="">--Select--</option>
+                            <option value="Baari">Baari Farmer supply group</option>
+                            <option value="Mairo-inya">Mairo-inya Farmer supply group</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="county" class="col-sm-3 col-form-label">County:</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="county" name="county" readonly class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sub-county" class="col-sm-3 col-form-label">Sub-county:</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="sub-county" name="subcounty" readonly class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="location" class="col-sm-3 col-form-label">Location:</label>
+                    <div class="col-sm-9">
+                        <input type="text" id="location" name="location" readonly class="form-control">
+                    </div>
+                </div>
+
+                <h6 class="text-center mb-3" style="text-decoration: underline;"> Personal Information</h6>
+                <div class="form-row">
+
+                    <div class="form-group col-md-4 mb-3 ">
+                        <label for="first-name">First Name</label>
+                        <input type="text" class="form-control" id="first-name" name="firstname" required>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="first-name">Middle Name</label>
+                        <input type="text" class="form-control" id="middlename" name="middlename" required>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    </div>
+                </div>
+                <!--Modified-->
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" name="dob" min="1940-01-01" max="2000-01-01"
+                            required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="village">Village(where you live)</label>
+                        <input type="text" class="form-control" id="village" name="village" required>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+                </div>
+                <!--Modified-->
+                <div class="form-row">
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="age">Age </label>
+                        <input type="number" class="form-control" id="age" name="age" readonly>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="marital-status">Marital Status</label>
+                        <select class="form-control" id="marital-status" name="maritalstatus" required>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Seperated</option>
+                            <option>Never Married</option>
+                            <option>Divorced</option>
+                            <option> Widowed</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="id-number">ID Number</label>
+                        <input type="text" class="form-control" id="id-number" name="idnumber" required>
+                    </div>
+                </div>
+                <!--Modified-->
+                <h6 class="text-center mb-3 " style="text-decoration: underline;">Household Size and Income Details</h6>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="main-occupation">Main occupation of household</label>
+                        <select class="form-control" id="main-occupation" name="occupation" required>
+                            <option>Livestock</option>
+                            <option>Own Farm Labor</option>
+                            <option>Employed (Salaried)</option>
+                            <option>Casual Labor</option>
+                            <option>Petty Trade</option>
+                            <option>Merchant/Trader</option>
+                            <option>Firewood/Charcoal</option>
+                            <option>Fishing</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="source-income">Main current source of income</label>
+                        <select class="form-control" id="source-income" name="incomesource" required>
+                            <option>No income</option>
+                            <option>Sale of livestock</option>
+                            <option>Sale of livestock Products</option>
+                            <option> Sale of crops</option>
+                            <option> Petty trading</option>
+                            <option>Casual labor</option>
+                            <option>Permanent job</option>
+                            <option>Sale of personal assets</option>
+                            <option>Remittance</option>
+                            <option>Fishing</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="monthly-income" ">Monthly income of the
+                        household</label>
+                    <select class=" form-control" id="monthly-income" name="monthlyincome" required>
+                            <option>Less than KES 1,000</option>
+                            <option>KES 1,000- KES 2,000</option>
+                            <option>KES 2,000-KES 5,000</option>
+                            <option>KES 5,000-KES 7,000</option>
+                            <option>More than KES 7,000</option>
+                            </select>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="children">Do you have children?</label>
+                        <select class="form-control" id="children" name="children" required>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-row" id="children-questions">
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="under-5">How many children under 5 years?</label>
+                        <input type="number" class="form-control" id="under-5" name="under5" value="0" min="0" disabled>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="6-to-11">How many children between 6 to 11 years?</label>
+                        <input type="number" class="form-control" id="children-6-to-11" name="children6to11" value="0"
+                            min="0" disabled>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="12-to-18">How many children between 12 to 18 years?</label>
+                        <input type="number" class="form-control" id="children-12-to-18" name="children12to18" value="0"
+                            min="0" disabled>
+                    </div>
+                </div>
+                <h6 class="text-center mb-3" style="text-decoration: underline;">Farm Details for Household</h6>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="land-status">Do you own or lease the land that you farm?</label>
+                        <select class="form-control" id="land-status" name="landstatus">
+
+                            <option>Own</option>
+                            <option>Lease</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+
+                        <label for="land-size">How big is your land (in acres)?</label>
+                        <input type="number" class="form-control" id="land-size" name="landsize" min="0.01" step="0.01"
+                            required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="crop-grown">What do you grow in your plot?</label>
+                        <input type="text" class="form-control" id="crop-grown" name="cropgrown" required>
+                    </div>
+
+                    <!---->
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="market-access">How's access to the market?</label>
+                        <select class="form-control" id="market-access" name="marketaccess" required>
+                            <option>Local market</option>
+                            <option>Urban market</option>
+                            <option>Middlemen</option>
+                            <option>Supermarkets</option>
+                            <option>Exports</option>
+                            <option>The internet</option>
+                            <option>Others</option>
+                        </select>
+                        <div id="other-market-access" style="display:none;">
+                            <input type="text" class="form-control" name="othermarketaccess"
+                                placeholder="Enter other market access...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="water-access">What is your main access to water?</label>
+                        <select class="form-control" id="water-access" name="wateraccess" required>
+                            <option>Own a well</option>
+                            <option>Neighbors well</option>
+                            <option>Tap water</option>
+                            <option>Storage tank from rain harvest</option>
+                            <option>River</option>
+                        </select>
+                    </div>
+                    <!-- Added-->
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="crop"> Which main crop did you harvest last season?</label>
+                        <input type="text" class="form-control" name="lastcrop" id="crop"
+                            placeholder="Enter the main crop" required>
+                    </div>
+                </div>
+                <div class="form-row d-flex flex-wrap">
+                    <!-- ... other form fields ... -->
+                    <div class="form-group col-md-6 mb-3" id="farm-animals-group">
+                        <label for="farm-animals">Do you own any farm animals? (List of options/multiple
+                            selection)</label>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Poultry" name="animals"
+                                        id="farm-animals-poultry">
+                                    <label class="form-check-label" for="farm-animals-poultry">
+                                        Poultry (Chickens, ducks, geese, etc.)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Cows" name="animals"
+                                        id="farm-animals-cows">
+                                    <label class="form-check-label" for="farm-animals-cows">
+                                        Cows
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Goats" name="animals"
+                                        id="farm-animals-goats">
+                                    <label class="form-check-label" for="farm-animals-goats">
+                                        Goats
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Sheep" name="animals"
+                                        id="farm-animals-sheep">
+                                    <label class="form-check-label" for="farm-animals-sheep">
+                                        Sheep
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Donkey" name="animals"
+                                        id="farm-animals-donkey">
+                                    <label class="form-check-label" for="farm-animals-donkey">
+                                        Donkey
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Fish" name="animals"
+                                        id="farm-animals-fish">
+                                    <label class="form-check-label" for="farm-animals-fish">
+                                        Fish
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Bees" name="animals"
+                                        id="farm-animals-bees">
+                                    <label class="form-check-label" for="farm-animals-bees">
+                                        Bees
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="earnings">How much did you earn from this crop last season?</label>
+                        <input type="text" class="form-control" name="cropearnings" id="earnings"
+                            placeholder="Enter the earnings" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="land-size"> What land size are you committing to the project (in acres)?</label>
+                        <input type="number" class="form-control" id="project" name="projectland" min="0.01" step="0.01"
+                            required>
+                    </div>
+                    <div class="form-group col-md-6 mb-1">
+                        <label for="pumpkin">Have you ever planted pumpkins before?</label>
+                        <select class="form-control" id="pumpkin" name="pumpkin" required>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-3">
+
+                        <label for="land-size">How much free time can you commit to the project weekly(in
+                            hours)?</label>
+                        <input type="number" class="form-control" id="project-time" name="projecttime" min="6" step="1"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <img src="/images/gps.png" width="30" height="30" class="d-inline-block mr-2">
+                        <button type="button" id="geolocationButton" class="btn btn-primary">Capture
+                            Geolocation</button>
+                        <input type="hidden" name="geoloc" id="geolocation">
+                        <div class="text-danger" id="geolocationError"></div>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="file">Upload photo of ID:</label>
+                        <input type="file" id="file" name="photo" accept=".jpg, .jpeg, .png" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="terms" required>
+                            By clicking here you agree to the terms and conditions of joining this group.
+                        </label>
+                    </div>
+                    <div class="text-center" style="text-align:center;">
+                        <button type="submit" class="btn btn-info">Submit</button>
+                    </div>
+            </form>
+            <!-- Scripts -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-/5GJoQzQ8Kkhkfutns3HJqeuQeOIvLrzaNjqnxO2r
+                FFN2pH/8I6rGJQVJoYXwT" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+            <!-- jQuery library -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/smoothness/jquery-ui.css">
+            <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+            <script>
+                // Get the geolocation and populate the hidden input field
+                function getGeolocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            function (position) {
+                                const latitude = position.coords.latitude;
+                                const longitude = position.coords.longitude;
+                                const geolocationInput = document.getElementById('geolocation');
+                                geolocationInput.value = `${latitude},${longitude}`;
+                                document.getElementById('geolocationError').textContent = '';
+                            },
+                            function (error) {
+                                const geolocationError = document.getElementById('geolocationError');
+                                geolocationError.textContent = error.message;
+                            }
+                        );
+                    } else {
+                        console.log('Geolocation is not supported by this browser.');
+                    }
+                }
+
+                // Form submission handler
+                function handleSubmit(event) {
+                    const geolocationInput = document.getElementById('geolocation');
+                    if (!geolocationInput.value) {
+                        event.preventDefault(); // Prevent form submission
+                        document.getElementById('geolocationError').textContent = 'Please capture geolocation.';
+                    }
+                }
+
+                // Call the getGeolocation function when the button is clicked
+                document.getElementById('geolocationButton').addEventListener('click', getGeolocation);
+                document.getElementById('survey').addEventListener('submit', handleSubmit);
+            </script>
+
+
+
+
+            <script>
+                // Add an event listener to the select element
+                const groupToLocationMap = {
+                    "Baari": {
+                        "county": "Nyandarua",
+                        "subcounty": "Ndaragwa",
+                        "location": "Baari"
+                    },
+                    "Mairo-inya": {
+                        "county": "Nyeri",
+                        "subcounty": "Mathira",
+                        "location": "Mairo-inya"
+                    }
+                };
+
+                const groupSelect = document.getElementById("group");
+                const countyInput = document.getElementById("county");
+                const subcountyInput = document.getElementById("sub-county");
+                const locationInput = document.getElementById("location");
+
+                groupSelect.addEventListener("change", () => {
+                    const selectedGroup = groupSelect.value;
+                    if (groupToLocationMap.hasOwnProperty(selectedGroup)) {
+                        countyInput.value = groupToLocationMap[selectedGroup].county;
+                        subcountyInput.value = groupToLocationMap[selectedGroup].subcounty;
+                        locationInput.value = groupToLocationMap[selectedGroup].location;
+                    } else {
+                        countyInput.value = "";
+                        subcountyInput.value = "";
+                        locationInput.value = "";
+                    }
+                });
+
+
+
+
+            </script>
+            <script>// Initialize datepicker with minDate option
+                // Initiate BS Custom File Input
+                $(document).ready(function () {
+                    bsCustomFileInput.init();
+                });
+            </script>
+            <!---
+        <script>
+            function getLocation() {
+                // Check if geolocation is supported by the browser
+                if (navigator.geolocation) {
+                    // Use getCurrentPosition() to retrieve the user's current location
+                    navigator.geolocation.getCurrentPosition(
+                        // Success callback
+                        function (position) {
+                            console.log("Button clicked successfully");
+                            // Get latitude and longitude coordinates from the position object
+                            var latitude = position.coords.latitude;
+                            var longitude = position.coords.longitude;
+                            // Construct a string with the latitude and longitude separated by a comma
+                            var geoloc = latitude + "," + longitude;
+                            console.log("Location coordinates retrieved successfully:", geoloc);
+                            // Set the value of the hidden location input field to the location string
+                            document.getElementById("geolocation").value = geoloc;
+                        },
+                        // Error callback
+                        function (error) {
+                            console.log(
+                                "An error occurred while trying to retrieve location:",
+                                error
+                            );
+                        }
+                    );
+                } else {
+                    // Geolocation is not supported by the browser
+                    console.log("Geolocation is not supported by this browser.");
+                }
+            }
+
+            // Event listener for button to get user's location
+            document
+                .getElementById("location-button")
+                .addEventListener("click", getLocation);
+
+            // Validation function
+            function validateForm(event) {
+                var geolocationField = document.getElementById("geolocation");
+                if (geolocationField.value === "") {
+                    // Show an error message and prevent form submission
+                    alert("Please make you click on Capture Geolocation of the farmer before submitting the form.");
+                    event.preventDefault();
+                }
+            }
+
+            // Event listener for form submission
+            document.getElementById("survey").addEventListener("submit", validateForm);</script>
+
+        </script>
+    -->
+            <script>
+                const childrenSelect = document.getElementById("children");
+                const childrenQuestions = document.getElementById("children-questions");
+                childrenSelect.addEventListener("change", function () {
+                    if (childrenSelect.value === "No") {
+                        document.getElementById("under-5").value = 0;
+                        document.getElementById("children-6-to-11").value = 0;
+                        document.getElementById("children-12-to-18").value = 0;
+                        document.getElementById("under-5").disabled = true;
+                        document.getElementById("children-6-to-11").disabled = true;
+                        document.getElementById("children-12-to-18").disabled = true;
+                    } else {
+                        document.getElementById("under-5").disabled = false;
+                        document.getElementById("children-6-to-11").disabled = false;
+                        document.getElementById("children-12-to-18").disabled = false;
+                    }
+                });
+                // Enable under5Field, children6to11Field, and children12to18Field when page loads if childrenField is already set to "yes"
+                if (childrenField.value === "Yes") {
+                    under5Field.disabled = false;
+                    children6to11Field.disabled = false;
+                    children12to18Field.disabled = false;
+                }
+                form.addEventListener("submit", function (event) {
+                });
+            </script>
+            <script>
+                //Market Access
+                const marketAccessSelect = document.getElementById('market-access');
+                const otherMarketAccessDiv = document.getElementById('other-market-access');
+                marketAccessSelect.addEventListener('change', () => {
+                    if (marketAccessSelect.value === 'Others') {
+                        otherMarketAccessDiv.style.display = 'block';
+                    } else {
+                        otherMarketAccessDiv.style.display = 'none';
+                    }
+                });
+            </script>
+            <script>
+                function validateForm() {
+                    var checkboxes = document.querySelectorAll('#farm-animals-group input[type="checkbox"]');
+                    var checked = false;
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].checked) {
+                            checked = true;
+                            break;
+                        }
+                    }
+                    if (!checked) {
+                        alert('Please select at least one animal from the list.');
+                        return false;
+                    }
+                    return true;
+                }
+
+
+            </script>
+</body>
+
+</html>
